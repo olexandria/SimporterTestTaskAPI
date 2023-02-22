@@ -20,6 +20,7 @@ Returns: Information about possible filtering (list of attributes and list of va
 GET /api/timeline
 Example:
 http://127.0.0.1:5000/api/timeline?startDate=2019-01-01&endDate=2020-01-01&Type=cumulative&Grouping=monthly&brand=Downy
+
 Parameters:
 - startDate
 - endDate
