@@ -15,6 +15,7 @@ This is a Flask API project that provides information about events and their tim
 GET /api/info
 Example:
 http://127.0.0.1:5000/api/info
+
 Returns: Information about possible filtering (list of attributes and list of values for each attribute)
 
 GET /api/timeline
