@@ -23,8 +23,7 @@ def get_timeline_data(start_date, end_date, grouping, timeline_type, filters):
 
     # Add the grouping and timeline type to the query
     if grouping == 'weekly':
-        query = query.group_by(func.strftime('%m-%W', Event.timestamp))
-        print(query)
+        query = query.group_by(func.strftime('%Y-%W', Event.timestamp))
     elif grouping == 'bi-weekly':
         query = query.group_by(func.cast(func.strftime('%W', Event.timestamp), Integer) / 2)
     elif grouping == 'monthly':
@@ -38,14 +37,12 @@ def get_timeline_data(start_date, end_date, grouping, timeline_type, filters):
             func.strftime('%Y-%m-%d', Event.timestamp).label('date'),
             func.sum(func.count(Event.id)).over(order_by=Event.timestamp.asc()).label('count')
         ).all()
-        print(timeline)
     elif timeline_type == 'usual':
         query = query.order_by(Event.timestamp.asc())
         timeline = query.with_entities(
             func.strftime('%Y-%m-%d', Event.timestamp).label('date'),
             func.count(Event.id).label('count')
         ).all()
-        print(timeline)
     else:
         return {'error': 'Invalid timeline type'}
 
